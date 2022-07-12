@@ -18,3 +18,20 @@
     transform-origin: center;
     scale: 0.9 0.9;
 }
+
+.ShieldButtonStyle {
+    opacity: 1;
+}
+
+.ShieldButtonStyle:hover {
+    opacity: 0.9;
+    -unity-background-image-tint-color: rgba(154, 154, 154, 255);
+}
+
+.ShieldButtonStyle:active {
+    opacity: 1;
+    scale: 0.9 0.9;
+}
+
+.ResumeButtonStyle {
+}

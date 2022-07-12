@@ -1,13 +1,13 @@
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
-public class PauseController : MonoBehaviour
+public class UIController : MonoBehaviour
 {
     private Button _pauseButton;
     private Button _resumeButton;
     private Button _restartButton;
+    private Button _exitGame;
 
 
     private VisualElement _pauseLabel;
@@ -18,6 +18,7 @@ public class PauseController : MonoBehaviour
         _pauseButton = root.Q<Button>("PauseButton");
         _resumeButton = root.Q<Button>("Resume");
         _restartButton = root.Q<Button>("Restart");
+        _exitGame = root.Q<Button>("Exit");
 
         _pauseLabel = root.Q<VisualElement>("BackgroundPause");
 
@@ -25,18 +26,21 @@ public class PauseController : MonoBehaviour
     }
 
     private void PauseButtonPressed()
-    {;
+    {
+        ;
         Time.timeScale = 0;
         _pauseLabel.style.display = DisplayStyle.Flex;
 
         _resumeButton.clicked += ResumeButtonPressed;
         _restartButton.clicked += RestartButtonPressed;
+        _exitGame.clicked += ExitGame;
     }
 
     private void ResumeButtonPressed()
     {
         _resumeButton.clicked -= ResumeButtonPressed;
         _restartButton.clicked -= RestartButtonPressed;
+        _exitGame.clicked -= ExitGame;
 
         Time.timeScale = 1;
         _pauseLabel.style.display = DisplayStyle.None;
@@ -46,5 +50,9 @@ public class PauseController : MonoBehaviour
     {
         _pauseButton.clicked -= PauseButtonPressed;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    private void ExitGame()
+    {
+        Application.Quit();
     }
 }
