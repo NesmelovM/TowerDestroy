@@ -9,7 +9,6 @@ public class UIController : MonoBehaviour
     private Button _restartButton;
     private Button _exitGame;
 
-
     private VisualElement _pauseLabel;
 
     void Start()
