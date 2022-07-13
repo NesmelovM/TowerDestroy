@@ -14,7 +14,7 @@ public class ColliderPush : MonoBehaviour
         if (other.collider.CompareTag("Player"))
         {
             other.gameObject.GetComponent<Health>().TakeDamage(_damage);
-        }
+        }       
     }
 
     private void Update()

@@ -49,6 +49,7 @@ public class UIController : MonoBehaviour
     {
         _pauseButton.clicked -= PauseButtonPressed;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Time.timeScale = 1;
     }
     private void ExitGame()
     {

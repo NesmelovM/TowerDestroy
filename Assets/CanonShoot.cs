@@ -9,8 +9,6 @@ public class CanonShoot : MonoBehaviour
 
     [SerializeField] private float _timeReload;
 
-    [SerializeField] int _bulletForce;
-
     private float _tempTimeReload;
     private bool _canShoot = true;
     private bool _isPlayer;
@@ -54,7 +52,7 @@ public class CanonShoot : MonoBehaviour
     {
         GameObject bullet = Instantiate(_bulletPrefab, _firePoint.position, _firePoint.rotation, _bulletParent);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        rb.AddForce(_firePoint.right * _bulletForce, ForceMode2D.Impulse);
+        rb.AddForce(_firePoint.right * Random.Range(8,15), ForceMode2D.Impulse);
         _canShoot = false;
     }
 
@@ -69,6 +67,5 @@ public class CanonShoot : MonoBehaviour
                 _tempTimeReload = _timeReload;
             }
         }
-
     }
 }
