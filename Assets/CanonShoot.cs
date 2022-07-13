@@ -4,21 +4,71 @@ public class CanonShoot : MonoBehaviour
 {
     [SerializeField] private Transform _firePoint;
     [SerializeField] private GameObject _bulletPrefab;
+    [SerializeField] private Transform _bulletParent;
+
+
+    [SerializeField] private float _timeReload;
 
     [SerializeField] int _bulletForce;
 
+    private float _tempTimeReload;
+    private bool _canShoot = true;
+    private bool _isPlayer;
+
+    private void Start()
+    {
+        _tempTimeReload = _timeReload;
+        if(gameObject.transform.parent.CompareTag("Player"))
+        {
+            _isPlayer = true;
+        }
+    }
     void Update()
     {
-        if (Input.touchCount > 0)
+        ShootInTouch();
+        ReloadTimer();
+    }
+
+    private void ShootInTouch()
+    {
+        if (_isPlayer)
         {
-            Shoot();
+            if (Input.touchCount > 0)
+            {
+                if (_canShoot)
+                {
+                    Shoot();
+                }
+            }
+        }
+        else
+        {
+            if (_canShoot)
+            {
+                Shoot();
+            }
         }
     }
 
     private void Shoot()
     {
-        GameObject bullet = Instantiate(_bulletPrefab, _firePoint.position, _firePoint.rotation, _firePoint);
+        GameObject bullet = Instantiate(_bulletPrefab, _firePoint.position, _firePoint.rotation, _bulletParent);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.AddForce(_firePoint.right * _bulletForce, ForceMode2D.Impulse);
+        _canShoot = false;
+    }
+
+    private void ReloadTimer()
+    {
+        if (_canShoot == false)
+        {
+            _tempTimeReload -= Time.deltaTime;
+            if (_tempTimeReload <= 0)
+            {
+                _canShoot = true;
+                _tempTimeReload = _timeReload;
+            }
+        }
+
     }
 }
