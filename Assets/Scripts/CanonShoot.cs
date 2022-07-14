@@ -16,6 +16,7 @@ public class CanonShoot : MonoBehaviour
     private void Start()
     {
         _tempTimeReload = _timeReload;
+
         if(gameObject.transform.parent.CompareTag("Player"))
         {
             _isPlayer = true;
