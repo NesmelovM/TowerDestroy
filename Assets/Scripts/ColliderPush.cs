@@ -41,12 +41,16 @@ public class ColliderPush : MonoBehaviour
                 {
                     Debug.Log("hit canon");
                     other.gameObject.transform.parent.parent.GetComponent<Health>().TakeDamage(_damage);
+
+                    this.gameObject.GetComponent<Collider2D>().enabled = false;
                 }
                 break;
             case _shield:
                 if (this.transform.parent.tag != other.transform.parent.parent.tag)
                 {
                     other.transform.GetComponent<ShieldHealths>().TakeDamage();
+
+                    this.gameObject.GetComponent<Collider2D>().enabled = false;
                 }
                 break;
         }
